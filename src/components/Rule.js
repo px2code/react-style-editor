@@ -115,17 +115,21 @@ class Rule extends React.PureComponent {
                 )}
                 onClick={this.onSelectorClick}
               >
-                                {cleanSelector}
-                            </span>
+                {cleanSelector}
+              </span>
             )}
             {!isValid && <Alert/>}
             {!hasSemicolon && <span onClick={this.onBraceClick}>{' {'}</span>}
+            {
+              !isEditingAfterBegin && !hasSemicolon &&
+              kids.every(item => item.type === DECLARATION) &&
+              <div style={{ marginLeft: 15, opacity: 0.3, fontSize: 12, }}>click to add..</div>
+            }
           </div>
         )}
 
         <div className={cls(classes.block, isTop && classes.blockIsTop)}>
           {isEditingAfterBegin && this.renderArea(AFTER_BEGIN)}
-
           {kids.map((item) => {
             const Component = typeToComponent[item.type];
             return (
@@ -198,7 +202,7 @@ class Rule extends React.PureComponent {
     if (this.props.disableAddNewRule) {
       return;
     }
-    
+
     this.setState({ isEditingBefore: true });
     this.props.onEditBegin();
   };
