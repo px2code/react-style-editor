@@ -267,10 +267,13 @@ class StyleEditor extends React.Component {
    *
    */
   onCopy = (event) => {
+    return;
+    /*
     if (hasSelection()) return;
     const blob = prettify(this.currentRules);
     event.nativeEvent.clipboardData.setData('text/plain', blob);
     event.preventDefault();
+     */
   };
 
   /**
